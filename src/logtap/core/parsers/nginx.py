@@ -4,29 +4,26 @@ import re
 from datetime import datetime
 from typing import Optional
 
-from logtap.core.parsers.base import LogParser, ParsedLogEntry, LogLevel
+from logtap.core.parsers.base import LogLevel, LogParser, ParsedLogEntry
 
 
 class NginxParser(LogParser):
     """
-    Parser for Nginx access log format.
-
-    Default combined format:
-    $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"
+    Parser for Nginx access log format (combined log format).
 
     Example:
-    192.168.1.1 - - [08/Jan/2024:10:23:45 +0000] "GET /api/health HTTP/1.1" 200 45 "-" "curl/7.68.0"
+    192.168.1.1 - - [08/Jan/2024:10:23:45 +0000] "GET /api HTTP/1.1" 200 45
     """
 
     # Combined log format pattern
     PATTERN = re.compile(
-        r'^(\S+)\s+'  # Remote address
-        r'(\S+)\s+'  # Identity (usually -)
-        r'(\S+)\s+'  # Remote user (usually -)
-        r'\[([^\]]+)\]\s+'  # Time
+        r"^(\S+)\s+"  # Remote address
+        r"(\S+)\s+"  # Identity (usually -)
+        r"(\S+)\s+"  # Remote user (usually -)
+        r"\[([^\]]+)\]\s+"  # Time
         r'"([^"]*)"\s+'  # Request
-        r'(\d{3})\s+'  # Status
-        r'(\d+|-)\s*'  # Bytes
+        r"(\d{3})\s+"  # Status
+        r"(\d+|-)\s*"  # Bytes
         r'(?:"([^"]*)"\s*)?'  # Referer (optional)
         r'(?:"([^"]*)")?'  # User agent (optional)
     )

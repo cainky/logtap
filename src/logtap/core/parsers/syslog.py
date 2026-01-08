@@ -2,9 +2,8 @@
 
 import re
 from datetime import datetime
-from typing import Optional
 
-from logtap.core.parsers.base import LogParser, ParsedLogEntry, LogLevel
+from logtap.core.parsers.base import LogParser, ParsedLogEntry
 
 
 class SyslogParser(LogParser):
@@ -26,10 +25,7 @@ class SyslogParser(LogParser):
 
     # Alternative pattern without PID brackets
     PATTERN_ALT = re.compile(
-        r"^(\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+"
-        r"(\S+)\s+"
-        r"(\S+):\s+"
-        r"(.*)$"
+        r"^(\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+" r"(\S+)\s+" r"(\S+):\s+" r"(.*)$"
     )
 
     @property

@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from typing import Optional
 
-from logtap.core.parsers.base import LogParser, ParsedLogEntry, LogLevel
+from logtap.core.parsers.base import LogLevel, LogParser, ParsedLogEntry
 
 
 class ApacheParser(LogParser):
@@ -15,29 +15,29 @@ class ApacheParser(LogParser):
     %h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-Agent}i"
 
     Example:
-    192.168.1.1 - frank [08/Jan/2024:10:23:45 -0500] "GET /apache.gif HTTP/1.0" 200 1234 "-" "Mozilla/5.0"
+    192.168.1.1 - frank [08/Jan/2024:10:23:45 -0500] "GET / HTTP/1.0" 200 1234
     """
 
     # Combined log format pattern (same as nginx essentially)
     PATTERN = re.compile(
-        r'^(\S+)\s+'  # Remote host
-        r'(\S+)\s+'  # Identity
-        r'(\S+)\s+'  # Remote user
-        r'\[([^\]]+)\]\s+'  # Time
+        r"^(\S+)\s+"  # Remote host
+        r"(\S+)\s+"  # Identity
+        r"(\S+)\s+"  # Remote user
+        r"\[([^\]]+)\]\s+"  # Time
         r'"([^"]*)"\s+'  # Request
-        r'(\d{3})\s+'  # Status
-        r'(\d+|-)\s*'  # Bytes
+        r"(\d{3})\s+"  # Status
+        r"(\d+|-)\s*"  # Bytes
         r'(?:"([^"]*)"\s*)?'  # Referer
         r'(?:"([^"]*)")?'  # User agent
     )
 
     # Error log pattern
     ERROR_PATTERN = re.compile(
-        r'^\[([^\]]+)\]\s+'  # Timestamp
-        r'\[(\w+)\]\s+'  # Level
-        r'(?:\[pid\s+(\d+)\]\s+)?'  # PID (optional)
-        r'(?:\[client\s+([^\]]+)\]\s+)?'  # Client (optional)
-        r'(.*)$'  # Message
+        r"^\[([^\]]+)\]\s+"  # Timestamp
+        r"\[(\w+)\]\s+"  # Level
+        r"(?:\[pid\s+(\d+)\]\s+)?"  # PID (optional)
+        r"(?:\[client\s+([^\]]+)\]\s+)?"  # Client (optional)
+        r"(.*)$"  # Message
     )
 
     @property

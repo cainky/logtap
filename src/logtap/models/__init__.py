@@ -1,7 +1,7 @@
 """Pydantic models for logtap API requests and responses."""
 
-from logtap.models.responses import LogResponse, ErrorResponse, FileListResponse
 from logtap.models.config import Settings
+from logtap.models.responses import ErrorResponse, FileListResponse, LogResponse
 
 __all__ = [
     "LogResponse",

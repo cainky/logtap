@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A CLI-first log access tool for Unix systems. Remote log file access without SSH."
 authors = ["cainky <kylecain.me@gmail.com>"]
 readme = "README.md"
-license = "MIT"
+license = "GPL-3.0-or-later"
 homepage = "https://github.com/cainky/logtap"
 repository = "https://github.com/cainky/logtap"
 keywords = ["logs", "monitoring", "cli", "devops", "sysadmin"]
@@ -13,7 +13,7 @@ classifiers = [
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: System Administrators",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
     "Programming Language :: Python :: 3.10",
@@ -46,6 +46,7 @@ pytest = "^7.4.0"
 pytest-asyncio = "^0.23.0"
 pytest-cov = "^4.1.0"
 ruff = "^0.1.0"
+pre-commit = "^4.5.1"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

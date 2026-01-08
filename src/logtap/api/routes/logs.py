@@ -2,7 +2,7 @@
 
 import asyncio
 import os
-from typing import List, Optional
+from typing import Optional
 
 import aiofiles
 from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, status
@@ -11,7 +11,7 @@ from starlette.responses import StreamingResponse
 from logtap.api.dependencies import get_settings, verify_api_key
 from logtap.core.reader import tail_async
 from logtap.core.search import filter_lines
-from logtap.core.validation import is_filename_valid, is_search_term_valid, is_limit_valid
+from logtap.core.validation import is_filename_valid, is_limit_valid, is_search_term_valid
 from logtap.models.config import Settings
 from logtap.models.responses import LogResponse
 
@@ -195,10 +195,7 @@ async def stream_logs(
                 # Check if client is still connected
                 try:
                     # Non-blocking receive to check connection
-                    await asyncio.wait_for(
-                        websocket.receive_text(),
-                        timeout=0.01
-                    )
+                    await asyncio.wait_for(websocket.receive_text(), timeout=0.01)
                 except asyncio.TimeoutError:
                     # No message, continue streaming
                     pass
@@ -208,7 +205,8 @@ async def stream_logs(
     except Exception as e:
         try:
             await websocket.send_json({"error": str(e)})
-        except:
+        except Exception:
+            # Connection already closed, ignore
             pass
 
 

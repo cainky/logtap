@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional
 
-from logtap.core.parsers.base import LogParser, ParsedLogEntry, LogLevel
+from logtap.core.parsers.base import LogLevel, LogParser, ParsedLogEntry
 
 
 class JsonLogParser(LogParser):
@@ -77,9 +77,7 @@ class JsonLogParser(LogParser):
             metadata=data,
         )
 
-    def _get_field(
-        self, data: Dict[str, Any], field_names: list, default: Any = None
-    ) -> Any:
+    def _get_field(self, data: Dict[str, Any], field_names: list, default: Any = None) -> Any:
         """Get first matching field from data."""
         for field in field_names:
             if field in data:

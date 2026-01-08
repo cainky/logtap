@@ -100,8 +100,8 @@ def tail(
                             console.print(message)
                 except websockets.exceptions.InvalidStatusCode as e:
                     if e.status_code == 404:
-                        console.print("[yellow]Streaming not available on this server.[/yellow]")
-                        console.print("[dim]The server may need to be updated to support streaming.[/dim]")
+                        console.print("[yellow]Streaming not available.[/yellow]")
+                        console.print("[dim]Server may need updating.[/dim]")
                     else:
                         console.print(f"[red]WebSocket error: {e}[/red]")
                 except Exception as e:

@@ -2,12 +2,11 @@
 
 from typing import List, Optional, Type
 
+from logtap.core.parsers.apache import ApacheParser
 from logtap.core.parsers.base import LogParser, ParsedLogEntry
 from logtap.core.parsers.json_parser import JsonLogParser
-from logtap.core.parsers.syslog import SyslogParser
 from logtap.core.parsers.nginx import NginxParser
-from logtap.core.parsers.apache import ApacheParser
-
+from logtap.core.parsers.syslog import SyslogParser
 
 # Parser priority order (more specific formats first)
 PARSERS: List[Type[LogParser]] = [
@@ -42,7 +41,7 @@ def detect_format(lines: List[str], sample_size: int = 10) -> Optional[LogParser
         parser = parser_cls()
         matches = sum(1 for line in sample if line.strip() and parser.can_parse(line))
         if matches > 0:
-            parser_scores[parser_cls] = matches / len([l for l in sample if l.strip()])
+            parser_scores[parser_cls] = matches / len([line for line in sample if line.strip()])
 
     if not parser_scores:
         return None

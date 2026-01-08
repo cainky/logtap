@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/logtap.svg)](https://badge.fury.io/py/logtap)
 [![Tests](https://github.com/cainky/logtap/actions/workflows/tests.yml/badge.svg)](https://github.com/cainky/logtap/actions/workflows/tests.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 **A CLI-first log access tool for Unix systems. Remote log file access without SSH.**
@@ -265,7 +265,7 @@ poetry run pytest tests/unit/test_reader.py
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+GPL v3 License - see [LICENSE](LICENSE) for details.
 
 ## Contributing
 

@@ -3,7 +3,7 @@
 import typer
 
 from logtap import __version__
-from logtap.cli.commands import serve, query, tail, files
+from logtap.cli.commands import files, query, serve, tail
 
 app = typer.Typer(
     name="logtap",

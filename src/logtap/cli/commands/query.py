@@ -5,7 +5,6 @@ from typing import Optional
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from rich.syntax import Syntax
 
 console = Console()
 
@@ -68,8 +67,8 @@ def query(
         logtap query auth.log --term "Failed password"
         logtap query syslog --regex "error.*connection" --limit 100
     """
+
     import httpx
-    import json as json_module
 
     # Build request
     headers = {}

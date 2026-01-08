@@ -1,14 +1,14 @@
 """Parsed log endpoints for logtap - with format detection and severity filtering."""
 
 import os
-from typing import List, Optional
+from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
 from logtap.api.dependencies import get_settings, verify_api_key
+from logtap.core.parsers import AutoParser, LogLevel
 from logtap.core.reader import tail_async
 from logtap.core.search import filter_entries
-from logtap.core.parsers import AutoParser, LogLevel, ParsedLogEntry
 from logtap.models.config import Settings
 
 router = APIRouter()
@@ -22,7 +22,7 @@ async def get_parsed_logs(
     limit: int = Query(default=50, ge=1, le=1000, description="Number of lines"),
     level: Optional[str] = Query(
         default=None,
-        description="Minimum severity level (DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY)",
+        description="Minimum severity level (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
     ),
     levels: Optional[str] = Query(
         default=None,
@@ -69,9 +69,10 @@ async def get_parsed_logs(
     if level:
         min_level = LogLevel.from_string(level)
         if not min_level:
+            valid = "DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY"
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Invalid level: {level}. Valid levels: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY",
+                detail=f"Invalid level: {level}. Valid levels: {valid}",
             )
 
     # Parse levels filter

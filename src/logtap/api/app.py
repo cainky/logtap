@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from logtap import __version__
-from logtap.api.routes import logs, files, health, parsed
+from logtap.api.routes import files, health, logs, parsed
 
 
 def create_app() -> FastAPI:
@@ -16,7 +16,7 @@ def create_app() -> FastAPI:
     """
     app = FastAPI(
         title="logtap",
-        description="A CLI-first log access tool for Unix systems. Remote log file access without SSH.",
+        description="A CLI-first log access tool for Unix systems.",
         version=__version__,
         docs_url="/docs",
         redoc_url="/redoc",

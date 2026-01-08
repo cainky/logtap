@@ -51,6 +51,7 @@ def serve(
         logtap serve --api-key mysecretkey
     """
     import os
+
     import uvicorn
 
     # Set environment variables for the app
@@ -60,7 +61,7 @@ def serve(
     if api_key:
         os.environ["LOGTAP_API_KEY"] = api_key
 
-    console.print(f"[bold green]Starting logtap server[/bold green]")
+    console.print("[bold green]Starting logtap server[/bold green]")
     console.print(f"  [dim]Host:[/dim] {host}")
     console.print(f"  [dim]Port:[/dim] {port}")
     console.print(f"  [dim]Log directory:[/dim] {log_dir}")
