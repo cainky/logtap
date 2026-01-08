@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logtap"
-version = "0.2.0"
+version = "0.2.1"
 description = "A CLI-first log access tool for Unix systems. Remote log file access without SSH."
 authors = ["cainky <kylecain.me@gmail.com>"]
 readme = "README.md"
