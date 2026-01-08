@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from logtap import __version__
-from logtap.api.routes import logs, files, health
+from logtap.api.routes import logs, files, health, parsed
 
 
 def create_app() -> FastAPI:
@@ -36,6 +36,7 @@ def create_app() -> FastAPI:
     app.include_router(health.router, tags=["health"])
     app.include_router(logs.router, prefix="/logs", tags=["logs"])
     app.include_router(files.router, prefix="/files", tags=["files"])
+    app.include_router(parsed.router, prefix="/parsed", tags=["parsed"])
 
     return app
 
