@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  logtap:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount host log directory as read-only
+      - /var/log:/var/log:ro
+    environment:
+      - LOGTAP_LOG_DIRECTORY=/var/log
+      # Uncomment to enable authentication:
+      # - LOGTAP_API_KEY=your-secret-api-key
+    restart: unless-stopped
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M

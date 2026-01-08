@@ -1,17 +1,62 @@
 [tool.poetry]
-name = "flasklogmonitor"
+name = "logtap"
 version = "0.1.0"
-description = ""
+description = "A CLI-first log access tool for Unix systems. Remote log file access without SSH."
 authors = ["cainky <kylecain.me@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/cainky/logtap"
+repository = "https://github.com/cainky/logtap"
+keywords = ["logs", "monitoring", "cli", "devops", "sysadmin"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
+]
+packages = [{include = "logtap", from = "src"}]
+
+[tool.poetry.scripts]
+logtap = "logtap.cli.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-flask = "^3.0.2"
-requests = "^2.31.0"
-flask-testing = "^0.8.1"
+fastapi = "^0.109.0"
+uvicorn = {extras = ["standard"], version = "^0.27.0"}
+typer = {extras = ["all"], version = "^0.9.0"}
+rich = "^13.7.0"
+pydantic = "^2.5.0"
+pydantic-settings = "^2.1.0"
 python-dotenv = "^1.0.1"
+aiofiles = "^23.2.1"
+httpx = "^0.26.0"
+websockets = "^12.0"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-asyncio = "^0.23.0"
+pytest-cov = "^4.1.0"
+ruff = "^0.1.0"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
 
 [build-system]
 requires = ["poetry-core"]
